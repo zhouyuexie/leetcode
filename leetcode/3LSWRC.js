@@ -11,4 +11,4 @@ function isRepeat(data){
 	return true;//说明是这种"bbbbbbb"
 }
 
-log(isRepeat("bbbbb").split())
+log(isRepeat("bbbba".split()))
