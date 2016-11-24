@@ -11,51 +11,30 @@ let isRepeat = (data)=>{
 	return true;//说明是这种"bbbbbbb"
 }
 
-// 删除相连的重复的数据
-let deleteRepeatString = (data) =>{
-	let noRepeat = "";
-	for(let i=0;i<data.length;i++){
-		if(data[i]!==data[i+1]){
-			noRepeat = data[i] + noRepeat;
-		}
-	}
-	return noRepeat.split("").reverse().join("");
-}
-
 //删除所有的重复数据
 let deleteAllRepeat = (data) =>{
-	let set = new Set();
+	let result = "";
 	let arrayData = data.split("");
 
 	arrayData.map((item)=>{
-		set.add(item);
+		if(result.indexOf(item)===-1){
+			//result没有这个字段
+			result = result + item;
+		}
 	});
 
-	let result = "";
-
-	set.forEach((item)=>{
-		result = result+item;
-	})
 	return result;
 }
 
 //一个都没有重复
 let isNoRepeat = (data) =>{
-	if(data!==deleteAllRepeat(data)){
-		//删除全部相同的字段,如果删除后和原来的相等,说明没有相同的字段
-		return false;
-	}
-	return true;
+	//删除全部相同的字段,如果删除后和原来的相等,说明没有相同的字段
+	return data===deleteAllRepeat(data)?true:false;
 }
 
 // 得到最大的数
 let getBig = (a,b) =>{
-	if(a>=b){
-		return a
-	}
-	else{
-		return b;
-	}
+	return a>=b?a:b;
 }
 
 // 循环获取数组里所有不相等相连的字符串
@@ -63,7 +42,7 @@ let getNoRepeatLength = (data) =>{
 	let Big = 0;//最大的数
 	let length = data.length;
 	let head = 0;//从数组下标第一个开始比较
-	let diffLength = 1;//从长度为2开始比较
+	let diffLength = 2;//从长度为1和2开始比较都可以的,但是因为检测过重复,所以不需要再从1开始
 
 	while(head!==length-1){
 		while(diffLength<=length-head){
@@ -98,7 +77,7 @@ let getNoRepeatLength = (data) =>{
 			// log(head,diffLength);
 			diffLength++;
 		}
-		diffLength = 1;//归位
+		diffLength = 2;//归位
 		head++;
 	}
 
@@ -117,8 +96,8 @@ let lengthOfLongestSubstring = (string) => {
 		return string.length;
 	}
 	//验证是不是全部一样的字符
-	let arrayData = string.split("");
-	let deleteRepeat = deleteRepeatString(arrayData);
+	
+	let deleteRepeat = deleteAllRepeat(string);
 	if(deleteRepeat.length===1){
 		//如果是的话返回1
 		return 1;
@@ -128,4 +107,4 @@ let lengthOfLongestSubstring = (string) => {
 	}
 }
 
-log(lengthOfLongestSubstring("wjgmypyakesezwmgtyozouebthzsvuftgoiefg"))
+log(lengthOfLongestSubstring("naovupjrglxlbhsrbyjrhighbgqhnnkaozxkog"))
