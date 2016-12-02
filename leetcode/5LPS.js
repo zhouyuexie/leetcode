@@ -96,11 +96,13 @@ const longestPalindrome = s => {
 			}
 			else{
 				// 跳过
-				// if(s.length>100){
+				// if(substr.length!==1){
 				// 	start = head+start;
+				// 	head++;
+					ArrayTime++;
+				// 	break;
 				// }
-				ArrayTime++;
-				// break;
+				
 			}
 			head++;
 		}
