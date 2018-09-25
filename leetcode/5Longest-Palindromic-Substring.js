@@ -6,12 +6,12 @@
 const isPalindromic = s => {
 	let len = s.length;
 	// 如果s为一个字符串
-	if(len===1){
+	if (len === 1) {
 		return false;
 	}
 
 	// 偶数
-	if(len%2===0){
+	if (len % 2 === 0) {
 		// const center = parseInt(len/2);//中间值
 
 		// let front = s.substr(0,center);//前面的字符串
@@ -23,12 +23,12 @@ const isPalindromic = s => {
 		// else{
 		// 	return false;
 		// }
-		let head = 0;//第一个
-		let last = len-1;//最后一个
+		let head = 0; //第一个
+		let last = len - 1; //最后一个
 
-		for(let i=0;i<len/2;i++){
+		for (let i = 0; i < len / 2; i++) {
 			// 判断是否相同
-			if(s[head]!==s[last]){
+			if (s[head] !== s[last]) {
 				//只要有一个不同就返回false
 				return false;
 			}
@@ -36,8 +36,7 @@ const isPalindromic = s => {
 			last--;
 		}
 		return true;
-	}
-	else{
+	} else {
 		// 奇数
 		// const center = parseInt(len/2);
 
@@ -52,16 +51,16 @@ const isPalindromic = s => {
 		// }
 		// 奇数
 		let head = 0;
-		let last = len-1;
-		while(head!==last){
-			if(s[head]!==s[last]){
+		let last = len - 1;
+		while (head !== last) {
+			if (s[head] !== s[last]) {
 				return false;
 			}
 			head++;
 			last--;
 		}
 		// 如果s为一个字符串
-		if(len===1){
+		if (len === 1) {
 			return false;
 		}
 		return true;
@@ -74,51 +73,49 @@ const isPalindromic = s => {
  * @return {[type]}   [description]
  */
 const longestPalindrome = s => {
-	if(s.length===1)return s;//如果输入字符串长度为1就直接返回
-	if(isPalindromic(s))return s;//如果一整个都是回文就直接返回
+	if (s.length === 1) return s; //如果输入字符串长度为1就直接返回
+	if (isPalindromic(s)) return s; //如果一整个都是回文就直接返回
 
-	let start = 0;//s开始地方
-	let head = 1;//指针
+	let start = 0; //s开始地方
+	let head = 1; //指针
 	let len = s.length;
 	let ArrayTime = 0;
-	let result = [];//存储回文
+	let result = []; //存储回文
 
-	while(start<len){
-		let diff = len-start;//head可以移动的范围
-		while(head<=diff){
-			let substr = s.substr(start,head);
-			
-			if(isPalindromic(substr)){
+	while (start < len) {
+		let diff = len - start; //head可以移动的范围
+		while (head <= diff) {
+			let substr = s.substr(start, head);
+
+			if (isPalindromic(substr)) {
 				// console.log(substr)
 				result.push(substr);
 				ArrayTime++;
-				
-			}
-			else{
+
+			} else {
 				// 跳过
 				// if(substr.length!==1){
 				// 	start = head+start;
 				// 	head++;
-					ArrayTime++;
+				ArrayTime++;
 				// 	break;
 				// }
-				
+
 			}
 			head++;
 		}
-		head=1;
+		head = 1;
 		start++;
 	}
 	console.log(ArrayTime)
 	// 如果一个都没有
-	if(result.length===0){
-		return s[0];//直接返回第一个
-	}
-	else{
+	if (result.length === 0) {
+		return s[0]; //直接返回第一个
+	} else {
 		// console.log(result)
-		return result.sort((a,b)=>{
-			return b.length-a.length;
-		})[0];//只返回第一个
+		return result.sort((a, b) => {
+			return b.length - a.length;
+		})[0]; //只返回第一个
 	}
 };
 
